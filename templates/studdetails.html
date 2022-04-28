@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datas Table</title>
+    <style>
+        * {
+            margin-left: 20px;
+            background-color: rgb(251, 247, 255);
+        }
+
+        table,
+        td,
+        th {
+            border: 2px solid black;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table.th {
+            font-weight: bold;
+        }
+
+        table {
+            width: 60%;
+        }
+
+        th {
+            height: 30px;
+            padding: 4px;
+        }
+
+        td {
+            height: 30px;
+            padding: 4px;
+            text-align: left;
+            padding-left: 8px;
+        }
+
+        .id {
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+
+
+<body>
+    <h1>My Students</h1>
+    <a href="/loggedstud">
+
+        <button type="button" class="btn-btn primary my-2">
+            Go to home
+        </button>
+
+        <a href="/add" class="btn text-secondary px-0">
+            <button type="button" class="btn-btn primary my-2">
+                Add Student
+            </button>
+        </a>
+    </a>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>username</th>
+            <th>status</th>
+        </tr>
+        {% for x in key %}
+        <tr>
+            <td class="id">{{x.id}}</td>
+            <td>{{x.first_name}} &nbsp {{x.last_name}}</td>
+            <td>{{x.userinfo.phone}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.username}}</td>
+            <td>
+
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>
