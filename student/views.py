@@ -12,8 +12,8 @@ def home(request):
     return render(request, "home.html")
 def studlog(request):
     return render(request, "studlog.html")
-def adminlog(request):
-    return render(request, "adminlog.html")
+# def adminlog(request):
+#     return render(request, "adminlog.html")
 def register(request):
     return render(request, "register.html")
 def handleLogin(request):
@@ -115,4 +115,26 @@ def activestud(request):
 def inactivestud(request):
     tables = User.objects.filter(is_active = False)
     return render(request, "inactive.html",{'key':tables})
-    
+@login_required()
+def updatestud(request, id):
+    if request.method=="POST":
+        fname=request.POST['fname']
+        lname=request.POST['lname']
+        email=request.POST['email']
+        phone=request.POST['phone']
+        User.objects.filter(id=id).update(first_name=fname,last_name=lname,email=email)
+        userinfo.objects.filter(user__id=id).update(phone=phone)
+        return redirect('/dash')
+    details=User.objects.get(id=id) 
+    return render(request, 'updatestud.html',{'details':details})
+    return render(request, "updatestud.html")
+def inactstud(request, id):
+    inact = User.objects.get(id=id)
+    inact.is_active = False
+    inact.save()
+    return redirect('/dash')
+def actstud(request, id):
+    act = User.objects.get(id=id)
+    act.is_active = True
+    act.save()
+    return redirect('/dash')

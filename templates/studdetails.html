@@ -28,7 +28,7 @@
         }
 
         table {
-            width: 60%;
+            width: 80%;
         }
 
         th {
@@ -60,12 +60,12 @@
     <h1>My Students</h1>
     <a href="/loggedstud">
 
-        <button type="button" class="btn-btn primary my-2">
+        <button type="button" class="btn btn-primary my-2">
             Go to home
         </button>
 
         <a href="/add" class="btn text-secondary px-0">
-            <button type="button" class="btn-btn primary my-2">
+            <button type="button" class="btn btn-primary my-2">
                 Add Student
             </button>
         </a>
@@ -78,6 +78,7 @@
             <th>Email</th>
             <th>username</th>
             <th>status</th>
+            <th>action</th>
         </tr>
         {% for x in key %}
         <tr>
@@ -87,9 +88,26 @@
             <td>{{x.email}}</td>
             <td>{{x.username}}</td>
             <td>
-
+                {% if x.is_active %}
+                <h6>Active</h6>
+                {% else %}
+                <h6>Inactive</h6>
+                {% endif %}
             </td>
-
+            <td><a href="{% url 'updatestud' x.id %}">
+                    <button class="btn btn-primary">Edit</button>
+                </a>
+                <!-- <td> -->
+                <a href="{% url 'inactstud' x.id %}">
+                    <button type="button" class="btn btn-danger">Inactivate</button>
+                </a>
+                <!-- </td> -->
+                <!-- <td> -->
+                <a href="{% url 'actstud' x.id %}">
+                    <button type="button" class="btn btn-success">Activate</button>
+                </a>
+            </td>
+            <!-- </td> -->
         </tr>
         {% endfor %}
     </table>
